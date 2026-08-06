@@ -44,6 +44,6 @@ aws s3 ls --region us-east-1   # Will SUCCEED
 
 ## Author
 
-**Emmanuel Mulenga** — Multi-Cloud Security Engineer | AWS (6x) | GCP (6x) | Azure (2x) | Terraform | CLLMSP | CLLMSE
+**Emmanuel Mulenga** — Multi-Cloud Security Engineer | AWS (6x) | GCP (2x) | Azure (2x) | Terraform | CLLMSP | CLLMSE
 - 🌐 LinkedIn: [linkedin.com/in/emmanuel-mulenga](https://www.linkedin.com/in/emmanuel-mulenga)
 - 💻 GitHub: [github.com/e-mulenga](https://github.com/e-mulenga)
