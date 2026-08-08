@@ -123,8 +123,11 @@ resource "aws_iam_role" "ssm" {
   name = "brokenlabs-vpc-lab-08-ssm-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
-    Statement = [{ Effect = "Allow"; Action = "sts:AssumeRole"
-      Principal = { Service = "ec2.amazonaws.com" } }]
+    Statement = [{
+      Effect = "Allow"
+      Action = "sts:AssumeRole"
+      Principal = { Service = "ec2.amazonaws.com" }
+    }]
   })
   tags = { Name = "brokenlabs-vpc-lab-08-ssm-role" }
 }
@@ -148,12 +151,16 @@ resource "aws_security_group" "sg_a" {
 
   ingress {
     description = "All traffic from VPC B"
-    from_port   = 0; to_port = 0; protocol = "-1"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = [var.vpc_b_cidr]
   }
 
   egress {
-    from_port = 0; to_port = 0; protocol = "-1"
+    from_port = 0
+    to_port   = 0
+    protocol  = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -169,12 +176,16 @@ resource "aws_security_group" "sg_b" {
 
   ingress {
     description = "All traffic from VPC A"
-    from_port   = 0; to_port = 0; protocol = "-1"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = [var.vpc_a_cidr]
   }
 
   egress {
-    from_port = 0; to_port = 0; protocol = "-1"
+    from_port = 0
+    to_port   = 0
+    protocol  = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 

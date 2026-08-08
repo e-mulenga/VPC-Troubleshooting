@@ -115,8 +115,13 @@ resource "aws_iam_role" "ssm" {
   name = "brokenlabs-vpc-lab-08-ssm-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
-    Statement = [{ Effect = "Allow"; Action = "sts:AssumeRole"
-      Principal = { Service = "ec2.amazonaws.com" } }]
+    Statement = [{
+      Effect    = "Allow"
+      Action    = "sts:AssumeRole"
+      Principal = {
+        Service = "ec2.amazonaws.com"
+      }
+    }]
   })
   tags = { Name = "brokenlabs-vpc-lab-08-ssm-role" }
 }
@@ -136,12 +141,16 @@ resource "aws_security_group" "sg_a" {
   description = "VPC A instance security group"
   vpc_id      = aws_vpc.vpc_a.id
   ingress {
-    from_port = 0; to_port = 0; protocol = "-1"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = [var.vpc_b_cidr]
     description = "All traffic from VPC B"
   }
   egress {
-    from_port = 0; to_port = 0; protocol = "-1"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = { Name = "brokenlabs-vpc-lab-08-sg-a" }
@@ -152,12 +161,16 @@ resource "aws_security_group" "sg_b" {
   description = "VPC B instance security group"
   vpc_id      = aws_vpc.vpc_b.id
   ingress {
-    from_port = 0; to_port = 0; protocol = "-1"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = [var.vpc_a_cidr]
     description = "All traffic from VPC A"
   }
   egress {
-    from_port = 0; to_port = 0; protocol = "-1"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = { Name = "brokenlabs-vpc-lab-08-sg-b" }
@@ -171,7 +184,10 @@ resource "aws_instance" "instance_a" {
   iam_instance_profile        = aws_iam_instance_profile.ssm.name
   associate_public_ip_address = true
   user_data = file("${path.module}/../scripts/user_data.sh")
-  metadata_options { http_tokens = "required"; http_endpoint = "enabled" }
+  metadata_options {
+    http_tokens   = "required"
+    http_endpoint = "enabled"
+  }
   tags = { Name = "brokenlabs-vpc-lab-08-instance-a", VPC = "A" }
 }
 
@@ -183,6 +199,9 @@ resource "aws_instance" "instance_b" {
   iam_instance_profile        = aws_iam_instance_profile.ssm.name
   associate_public_ip_address = true
   user_data = file("${path.module}/../scripts/user_data.sh")
-  metadata_options { http_tokens = "required"; http_endpoint = "enabled" }
+  metadata_options {
+    http_tokens   = "required"
+    http_endpoint = "enabled"
+  }
   tags = { Name = "brokenlabs-vpc-lab-08-instance-b", VPC = "B" }
 }
